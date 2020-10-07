@@ -96,8 +96,8 @@ public class AlarmService extends Service {
                 0, notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, SERVICE_CHANNEL_ID)
-                .setContentTitle("Alarm Service")
-                .setContentText("Location alarm set for " + stopName)
+                .setContentTitle("Location Alarm Active (" + stopName + ")")
+                .setContentText("Click here to stop alarm")
                 .setSmallIcon(R.mipmap.wander_mate)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -137,8 +137,8 @@ public class AlarmService extends Service {
         PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(this, ALARM_ALERT_CHANNEL_ID)
-                .setContentTitle("Reached location!")
-                .setContentText("Click to stop alarm")
+                .setContentTitle("Location Reached")
+                .setContentText("Click here to stop alarm")
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
