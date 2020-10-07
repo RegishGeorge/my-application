@@ -57,6 +57,6 @@ public interface WanderMateDao {
            "FROM ROUTE R JOIN ROUTEDETAILS RS ON (RS.route_id = R.route_id) JOIN STOP SS ON (SS.stop_id = RS.stop_id) " +
            "JOIN SERVICE SC ON (SC.route_id = R.route_id) JOIN BUS B ON (B.bus_id = SC.bus_id) WHERE R.route_id = :rid AND " +
            "B.bus_id = :bid AND RS.stop_number >= (SELECT RSF.stop_number FROM ROUTE RF JOIN ROUTEDETAILS RSF ON (RSF.route_id = RF.route_id) JOIN STOP SSF ON (SSF.stop_id = RSF.stop_id) " +
-           "JOIN SERVICE SCF ON (SCF.route_id = RF.route_id) JOIN BUS BF ON (BF.bus_id = SCF.bus_id) WHERE RF.route_id = :rid AND BF.bus_id = :bid AND SSF.stop_name = :name )")
+           "JOIN SERVICE SCF ON (SCF.route_id = RF.route_id) JOIN BUS BF ON (BF.bus_id = SCF.bus_id) WHERE RF.route_id = :rid AND BF.bus_id = :bid AND SSF.stop_name = :name ) ORDER BY RS.stop_number")
     LiveData<List<ServiceDetailsObject>> getServiceDetails(int rid, int bid, String name);
 }
