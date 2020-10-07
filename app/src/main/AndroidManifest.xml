@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.wandermate">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name=".NotificationChannel"
+        android:icon="@mipmap/wander_mate"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/wander_mate"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ServiceDetailsActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".StopAlarmActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".StopDetailsActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".FilteredServicesViewActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACyUg6ZVx2tog3VO9jCDgrT6FiR6OGi8o" />
+
+        <activity
+            android:name=".LocationAlarmActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".NearbyServicesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PermissionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LauncherActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FindServicesActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".AlarmService"
+            android:foregroundServiceType="location" />
+
+        <receiver android:name=".NotificationReceiver" />
+    </application>
+
+</manifest>
