@@ -33,8 +33,7 @@ public class LauncherActivity extends AppCompatActivity {
         btnNearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, PermissionsActivity.class);
-                intent.putExtra("Parent", "Nearby");
+                Intent intent = new Intent(LauncherActivity.this, NearbyServicesActivity.class);
                 startActivity(intent);
             }
         });
@@ -42,8 +41,7 @@ public class LauncherActivity extends AppCompatActivity {
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, PermissionsActivity.class);
-                intent.putExtra("Parent", "Alarm");
+                Intent intent = new Intent(LauncherActivity.this, LocationAlarmActivity.class);
                 startActivity(intent);
             }
         });

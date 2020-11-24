@@ -25,8 +25,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 public class PermissionsActivity extends AppCompatActivity {
 
     private Button btnGrant;
-    private static final String NEARBY = "Nearby";
-    private static final String ALARM = "Alarm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +32,8 @@ public class PermissionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_permissions);
 
         if(ContextCompat.checkSelfPermission(PermissionsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED) {
-            if(NEARBY.equals(getIntent().getStringExtra("Parent"))) {
-                startActivity(new Intent(PermissionsActivity.this, NearbyServicesActivity.class));
-            } else if(ALARM.equals(getIntent().getStringExtra("Parent"))) {
-                startActivity(new Intent(PermissionsActivity.this, LocationAlarmActivity.class));
-            }
+            Intent intent = new Intent(PermissionsActivity.this, LauncherActivity.class);
+            startActivity(intent);
             finish();
             return;
         }
@@ -52,11 +47,8 @@ public class PermissionsActivity extends AppCompatActivity {
                         .withListener(new PermissionListener() {
                             @Override
                             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                if(NEARBY.equals(getIntent().getStringExtra("Parent"))) {
-                                    startActivity(new Intent(PermissionsActivity.this, NearbyServicesActivity.class));
-                                } else if(ALARM.equals(getIntent().getStringExtra("Parent"))) {
-                                    startActivity(new Intent(PermissionsActivity.this, LocationAlarmActivity.class));
-                                }
+                                Intent intent = new Intent(PermissionsActivity.this, LauncherActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
 
