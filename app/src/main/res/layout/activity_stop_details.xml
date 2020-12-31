@@ -60,11 +60,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/cardView"
         android:layout_marginBottom="8dp"
         android:visibility="visible"
         tools:listitem="@layout/stop_service_item" />
+
+    <Button
+        android:id="@+id/btnNavigate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Navigate"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/txtNoService"

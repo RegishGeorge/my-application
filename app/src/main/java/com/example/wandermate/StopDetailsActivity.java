@@ -7,11 +7,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +27,7 @@ public class StopDetailsActivity extends AppCompatActivity {
     private TextView txtNoService, txtTitle;
     private CardView cardView;
     private RecyclerView recyclerView;
+    private Button btnNavigate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,8 @@ public class StopDetailsActivity extends AppCompatActivity {
         animationDrawable.start();
 
         START_NAME = getIntent().getStringExtra("Stop Name");
+        Bundle bundle = getIntent().getParcelableExtra("Stop Position");
+        final LatLng position = bundle.getParcelable("position");
         String timeString_hr = getIntent().getStringExtra("Time Hour");
         String timeString_min = getIntent().getStringExtra("Time Min");
         int time_hr = Integer.parseInt(timeString_hr);
@@ -43,6 +51,7 @@ public class StopDetailsActivity extends AppCompatActivity {
         txtNoService = findViewById(R.id.txtNoService);
         txtTitle = findViewById(R.id.txtTitle);
         cardView = findViewById(R.id.cardView);
+        btnNavigate = findViewById(R.id.btnNavigate);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,14 +68,28 @@ public class StopDetailsActivity extends AppCompatActivity {
                     txtTitle.setVisibility(View.GONE);
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
+                    btnNavigate.setVisibility(View.GONE);
                     txtNoService.setVisibility(View.VISIBLE);
                 } else {
                     txtNoService.setVisibility(View.GONE);
                     txtTitle.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
+                    btnNavigate.setVisibility(View.VISIBLE);
                     adapter.setStopServices(stopServices);
                 }
+            }
+        });
+
+        btnNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String destination = "&destination="+ position.latitude +"%2C+"+ position.longitude;
+                String travelMode = "&travelmode=walking";
+                String dirAction = "&dir_action=navigate";
+                String url = "https://www.google.com/maps/dir/?api=1"+ destination + travelMode + dirAction;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
             }
         });
     }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,9 +42,9 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
     private TextView txtNoService, txtTitle;
     private CardView cardView;
     private RecyclerView recyclerView;
-    private Button btnSet;
+    private Button btnSet, btnFindDirections;
     LocationRequest locationRequest;
-    LatLng latLngStop;
+    LatLng latLngStop, latLngStart;
     String stopName;
 
     @Override
@@ -65,6 +66,7 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         cardView = findViewById(R.id.cardView);
         btnSet = findViewById(R.id.btnSet);
+        btnFindDirections = findViewById(R.id.btnFindDirections);
 
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(4000);
@@ -92,6 +94,7 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     btnSet.setVisibility(View.GONE);
+                    btnFindDirections.setVisibility(View.GONE);
                     txtNoService.setVisibility(View.VISIBLE);
                 } else {
                     txtNoService.setVisibility(View.GONE);
@@ -99,6 +102,7 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
                     cardView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     btnSet.setVisibility(View.VISIBLE);
+                    btnFindDirections.setVisibility(View.VISIBLE);
                     adapter.setRoutes(services);
                 }
             }
@@ -110,6 +114,25 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
                 if(stops.size()==1) {
                     latLngStop = new LatLng(stops.get(0).getStop_latitude(), stops.get(0).getStop_longitude());
                 }
+            }
+        });
+
+        viewModel.getCoordinates(start).observe(this, new Observer<List<Stop>>() {
+            @Override
+            public void onChanged(List<Stop> stops) {
+                if(stops.size()==1) {
+                    latLngStart = new LatLng(stops.get(0).getStop_latitude(),stops.get(0).getStop_longitude());
+                }
+            }
+        });
+
+        btnFindDirections.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String destination = "&destination="+ latLngStart.latitude +"%2C+"+ latLngStart.longitude;
+                String url = "https://www.google.com/maps/dir/?api=1"+ destination;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
             }
         });
 

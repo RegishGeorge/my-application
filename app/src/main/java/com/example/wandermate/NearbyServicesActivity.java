@@ -49,6 +49,7 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
     private WanderMateViewModel viewModel;
     private ArrayList<Stop> coordinates;
     private String stop = "";
+    private LatLng position;
     GoogleMap mMap;
 
     @Override
@@ -189,11 +190,15 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
             String time_min = date_min.format(currentTime);
             Intent intent = new Intent(this, StopDetailsActivity.class);
             intent.putExtra("Stop Name", stop);
+            Bundle args = new Bundle();
+            args.putParcelable("position", position);
+            intent.putExtra("Stop Position", args);
             intent.putExtra("Time Hour", time_hr);
             intent.putExtra("Time Min", time_min);
             startActivity(intent);
         }
         stop = marker.getTitle();
+        position = marker.getPosition();
         return false;
     }
 }
