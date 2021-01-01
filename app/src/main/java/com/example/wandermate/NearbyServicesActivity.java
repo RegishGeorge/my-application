@@ -11,8 +11,12 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -106,7 +110,16 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
                                 }
                             }
                             if(flag==0) {
-                                Toast.makeText(NearbyServicesActivity.this, "No stops nearby", Toast.LENGTH_SHORT).show();
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                                ImageView imageView = layout.findViewById(R.id.imageView);
+                                TextView textView = layout.findViewById(R.id.txt_message);
+                                imageView.setImageResource(R.drawable.ic_emoji_sad);
+                                textView.setText("No stops nearby");
+                                final Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                             }
                         }
                     }
@@ -133,7 +146,16 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 //Settings of device are satisfied
                 enableUserLocation();
-                Toast.makeText(NearbyServicesActivity.this, "Fetching location...", Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                ImageView imageView = layout.findViewById(R.id.imageView);
+                TextView textView = layout.findViewById(R.id.txt_message);
+                imageView.setImageResource(R.drawable.ic_gps);
+                textView.setText("Fetching location...");
+                final Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

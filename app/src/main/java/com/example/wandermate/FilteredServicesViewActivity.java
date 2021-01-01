@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +43,7 @@ import static com.example.wandermate.AlarmService.SERVICE_ACTIVE;
 public class FilteredServicesViewActivity extends AppCompatActivity {
     private static final String TAG = "FilteredServicesView";
     private WanderMateViewModel viewModel;
-    private TextView txtNoService, txtTitle;
+    private TextView txtNoService, txtTitle, txtSetAlarm, txtDirections;
     private CardView cardView;
     private RecyclerView recyclerView;
     private Button btnSet, btnFindDirections;
@@ -67,6 +71,8 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
         cardView = findViewById(R.id.cardView);
         btnSet = findViewById(R.id.btnSet);
         btnFindDirections = findViewById(R.id.btnFindDirections);
+        txtSetAlarm = findViewById(R.id.txt_set_alarm);
+        txtDirections = findViewById(R.id.txt_directions);
 
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(4000);
@@ -81,10 +87,6 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
         final ServiceAdapter adapter = new ServiceAdapter();
         recyclerView.setAdapter(adapter);
 
-        if(SERVICE_ACTIVE) {
-            btnSet.setEnabled(false);
-        }
-
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(WanderMateViewModel.class);
         viewModel.getAllServices(start, stop).observe(this, new Observer<List<OutputObject>>() {
             @Override
@@ -94,15 +96,24 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     btnSet.setVisibility(View.GONE);
+                    txtSetAlarm.setVisibility(View.GONE);
                     btnFindDirections.setVisibility(View.GONE);
+                    txtDirections.setVisibility(View.GONE);
                     txtNoService.setVisibility(View.VISIBLE);
                 } else {
                     txtNoService.setVisibility(View.GONE);
                     txtTitle.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
-                    btnSet.setVisibility(View.VISIBLE);
+                    if(!SERVICE_ACTIVE) {
+                        btnSet.setVisibility(View.VISIBLE);
+                        txtSetAlarm.setVisibility(View.VISIBLE);
+                    } else {
+                        txtSetAlarm.setVisibility(View.GONE);
+                        btnSet.setVisibility(View.GONE);
+                    }
                     btnFindDirections.setVisibility(View.VISIBLE);
+                    txtDirections.setVisibility(View.VISIBLE);
                     adapter.setRoutes(services);
                 }
             }
@@ -156,7 +167,12 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 Log.d(TAG, "checkSettingsAndStartLocationUpdates: Service Started");
                 Intent serviceIntent = new Intent(FilteredServicesViewActivity.this, AlarmService.class);
-                Toast.makeText(FilteredServicesViewActivity.this, "Alarm set", Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                final Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
                 serviceIntent.putExtra("Latitude", latLngStop.latitude);
                 serviceIntent.putExtra("Longitude", latLngStop.longitude);
                 serviceIntent.putExtra("Name", stopName);

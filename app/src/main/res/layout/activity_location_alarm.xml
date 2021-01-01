@@ -8,51 +8,94 @@
     android:background="@drawable/gradient_animation"
     tools:context=".LocationAlarmActivity">
 
+    <TextView
+        android:id="@+id/location_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location Alarm"
+        android:textSize="26sp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <fragment
         android:id="@+id/mapAlarm"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/location_alarm" />
 
     <AutoCompleteTextView
         android:id="@+id/editTextDestination"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_margin="16dp"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:backgroundTintMode="screen"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_location_icon"
+        android:drawablePadding="12dp"
+        android:ems="10"
         android:hint="Destination"
         android:inputType="textCapWords"
-        android:textColor="@android:color/holo_red_light"
-        android:textStyle="bold"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapAlarm" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnShow"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:text="Show on Map"
+        android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/custom_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDestination" />
 
-    <Button
-        android:id="@+id/btnSet"
-        android:layout_width="150dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@id/bottom_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Alarm"
-        android:textStyle="bold"
+        android:layout_margin="8dp"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnShow" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnSet"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_add_alarm"
+            app:layout_constraintBottom_toTopOf="@id/txt_set_alarm"
+            app:layout_constraintEnd_toEndOf="@id/txt_set_alarm"
+            app:layout_constraintStart_toStartOf="@+id/txt_set_alarm"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_set_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Alarm"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

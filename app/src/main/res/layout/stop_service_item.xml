@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="5dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="8dp">
 
         <TextView
@@ -18,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="Service Name - Destination"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/txtTime"
@@ -27,7 +29,7 @@
             android:layout_alignParentEnd="true"
             android:text="Time"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
 

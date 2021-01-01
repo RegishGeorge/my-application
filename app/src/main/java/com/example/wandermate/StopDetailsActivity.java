@@ -24,7 +24,7 @@ import java.util.List;
 public class StopDetailsActivity extends AppCompatActivity {
     public static String START_NAME;
     private WanderMateViewModel viewModel;
-    private TextView txtNoService, txtTitle;
+    private TextView txtNoService, txtTitle, txtNavigate;
     private CardView cardView;
     private RecyclerView recyclerView;
     private Button btnNavigate;
@@ -52,6 +52,7 @@ public class StopDetailsActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtTitle);
         cardView = findViewById(R.id.cardView);
         btnNavigate = findViewById(R.id.btnNavigate);
+        txtNavigate = findViewById(R.id.txt_navigate);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -69,6 +70,7 @@ public class StopDetailsActivity extends AppCompatActivity {
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     btnNavigate.setVisibility(View.GONE);
+                    txtNavigate.setVisibility(View.GONE);
                     txtNoService.setVisibility(View.VISIBLE);
                 } else {
                     txtNoService.setVisibility(View.GONE);
@@ -76,6 +78,7 @@ public class StopDetailsActivity extends AppCompatActivity {
                     cardView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     btnNavigate.setVisibility(View.VISIBLE);
+                    txtNavigate.setVisibility(View.VISIBLE);
                     adapter.setStopServices(stopServices);
                 }
             }

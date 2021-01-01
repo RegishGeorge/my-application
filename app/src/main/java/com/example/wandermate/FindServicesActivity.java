@@ -54,11 +54,19 @@ public class FindServicesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String start = editTxtFrom.getText().toString().trim();
                 String stop = editTxtTo.getText().toString().trim();
-                if(start.isEmpty() || stop.isEmpty()) {
-                    Toast.makeText(FindServicesActivity.this, "Please provide both the fields!", Toast.LENGTH_SHORT).show();
+                if(start.isEmpty()) {
+                    editTxtFrom.setError("Please enter the starting location");
+                } else if(stop.isEmpty()) {
+                    editTxtTo.setError("Please enter the final destination");
+                } else if(!stops.contains(start)) {
+                    editTxtFrom.setError("Select a location from the drop down list");
+                } else if(!stops.contains(stop)) {
+                    editTxtTo.setError("Select a destination from the drop down list");
                 } else {
                     editTxtFrom.getText().clear();
                     editTxtTo.getText().clear();
+                    editTxtFrom.clearFocus();
+                    editTxtTo.clearFocus();
                     Intent intent = new Intent(getBaseContext(), FilteredServicesViewActivity.class);
                     intent.putExtra("Start", start);
                     intent.putExtra("Stop", stop);

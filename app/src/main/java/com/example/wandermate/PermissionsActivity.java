@@ -11,8 +11,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -47,6 +51,16 @@ public class PermissionsActivity extends AppCompatActivity {
                         .withListener(new PermissionListener() {
                             @Override
                             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                                ImageView imageView = layout.findViewById(R.id.imageView);
+                                TextView textView = layout.findViewById(R.id.txt_message);
+                                imageView.setImageResource(R.drawable.ic_location_white);
+                                textView.setText("Permission Granted");
+                                final Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
                                 Intent intent = new Intent(PermissionsActivity.this, LauncherActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -73,7 +87,16 @@ public class PermissionsActivity extends AppCompatActivity {
                                             .show();
 
                                 } else {
-                                    Toast.makeText(PermissionsActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                                    ImageView imageView = layout.findViewById(R.id.imageView);
+                                    TextView textView = layout.findViewById(R.id.txt_message);
+                                    imageView.setImageResource(R.drawable.ic_emoji_sad);
+                                    textView.setText("Permission Denied");
+                                    final Toast toast = new Toast(getApplicationContext());
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.setView(layout);
+                                    toast.show();
                                 }
                             }
 

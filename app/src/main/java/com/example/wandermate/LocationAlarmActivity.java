@@ -12,7 +12,9 @@ import android.content.IntentSender;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -49,6 +51,7 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
     private ArrayList<String> stops;
     private ArrayAdapter<String> adapter;
     private Marker marker = null;
+    private ConstraintLayout bottomLayout;
     LocationRequest locationRequest;
     LatLng latLngStop;
     String stopName;
@@ -71,15 +74,12 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
         editTextDestination = findViewById(R.id.editTextDestination);
         btnShow = findViewById(R.id.btnShow);
         btnSet = findViewById(R.id.btnSet);
+        bottomLayout = findViewById(R.id.bottom_layout);
 
         locationRequest = LocationRequest.create();
         locationRequest.setInterval(4000);
         locationRequest.setFastestInterval(2000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        if(SERVICE_ACTIVE) {
-            btnSet.setEnabled(false);
-        }
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(WanderMateViewModel.class);
         viewModel.getAllStops().observe(this, new Observer<List<String>>() {
@@ -93,13 +93,17 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
             @Override
             public void onClick(View v) {
                 String destination = editTextDestination.getText().toString().trim();
+                if(destination.isEmpty()) {
+                    editTextDestination.setError("Please enter a destination");
+                    return;
+                }
                 viewModel.getCoordinates(destination).observe(LocationAlarmActivity.this, new Observer<List<Stop>>() {
                     @Override
                     public void onChanged(List<Stop> stops) {
                         if(stops.size() == 1) {
                             latLngStop = new LatLng(stops.get(0).getStop_latitude(), stops.get(0).getStop_longitude());
                             stopName = stops.get(0).getStop_name();
-                            btnSet.setVisibility(View.VISIBLE);
+                            bottomLayout.setVisibility(View.VISIBLE);
                             if(marker != null) {
                                 marker.remove();
                             }
@@ -108,7 +112,7 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
                                     .position(latLngStop));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngStop, 15));
                         } else {
-                            Toast.makeText(LocationAlarmActivity.this, "Please enter a valid destination", Toast.LENGTH_SHORT).show();
+                            editTextDestination.setError("Select a destination from the drop down list");
                         }
                     }
                 });
@@ -146,7 +150,12 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
             public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
                 Log.d(TAG, "checkSettingsAndStartLocationUpdates: Service Started");
                 Intent serviceIntent = new Intent(LocationAlarmActivity.this, AlarmService.class);
-                Toast.makeText(LocationAlarmActivity.this, "Alarm set", Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                final Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setView(layout);
+                toast.show();
                 serviceIntent.putExtra("Latitude", latLngStop.latitude);
                 serviceIntent.putExtra("Longitude", latLngStop.longitude);
                 serviceIntent.putExtra("Name", stopName);
