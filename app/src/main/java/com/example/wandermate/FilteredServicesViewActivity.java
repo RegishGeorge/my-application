@@ -177,7 +177,9 @@ public class FilteredServicesViewActivity extends AppCompatActivity {
                 serviceIntent.putExtra("Longitude", latLngStop.longitude);
                 serviceIntent.putExtra("Name", stopName);
                 ContextCompat.startForegroundService(FilteredServicesViewActivity.this, serviceIntent);
-                finish();
+                Intent intent = new Intent(FilteredServicesViewActivity.this, LauncherActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
         locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
