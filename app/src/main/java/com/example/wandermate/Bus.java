@@ -5,12 +5,13 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Bus {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int bus_id;
 
     private String bus_name;
 
-    public Bus(String bus_name) {
+    public Bus(int bus_id, String bus_name) {
+        this.bus_id = bus_id;
         this.bus_name = bus_name;
     }
 

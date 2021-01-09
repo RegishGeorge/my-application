@@ -14,39 +14,7 @@
         android:roundIcon="@mipmap/wander_mate"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ServiceDetailsActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".StopAlarmActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".StopDetailsActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".FilteredServicesViewActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyACyUg6ZVx2tog3VO9jCDgrT6FiR6OGi8o" />
-
-        <activity
-            android:name=".LocationAlarmActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".NearbyServicesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".PermissionsActivity"
-            android:screenOrientation="portrait" >
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,10 +22,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LauncherActivity"
+            android:name=".ServiceDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".StopAlarmActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".StopDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FilteredServicesViewActivity"
+            android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACyUg6ZVx2tog3VO9jCDgrT6FiR6OGi8o" />
+
+        <activity
+            android:name=".LocationAlarmActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".NearbyServicesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PermissionsActivity"
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".LauncherActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FindServicesActivity"
             android:screenOrientation="portrait" />

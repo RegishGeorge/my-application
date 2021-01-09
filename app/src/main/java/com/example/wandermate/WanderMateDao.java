@@ -31,7 +31,7 @@ public interface WanderMateDao {
            "(SC.start_time_mins + RE.duration_mins) % 60 AS arrival_time_mins " +
            "FROM ROUTE R JOIN ROUTEDETAILS RS ON (RS.route_id = R.route_id) JOIN STOP SS ON (SS.stop_id = RS.stop_id) JOIN ROUTEDETAILS RE ON (RE.route_id = R.route_id) " +
            "JOIN STOP SE ON (SE.stop_id = RE.stop_id) JOIN SERVICE SC ON (SC.route_id = R.route_id) JOIN BUS B ON (B.bus_id = SC.bus_id) WHERE SS.stop_name = :start AND " +
-           "SE.stop_name = :stop AND RS.stop_number < RE.stop_number")
+           "SE.stop_name = :stop AND RS.stop_number < RE.stop_number ORDER BY departure_time_hrs, departure_time_mins")
     LiveData<List<OutputObject>> getAllServices(String start, String stop);
 
     @Query("SELECT stop_name FROM STOP")
@@ -45,7 +45,7 @@ public interface WanderMateDao {
            "(SC.start_time_mins + RS.duration_mins) % 60 AS departure_time_mins "+
            "FROM ROUTE R JOIN ROUTEDETAILS RS ON (RS.route_id = R.route_id) JOIN STOP SS ON (SS.stop_id = RS.stop_id) JOIN ROUTEDETAILS RE ON (RE.route_id = R.route_id)"+
            "JOIN STOP SE ON (SE.stop_id = RE.stop_id) JOIN SERVICE SC ON (SC.route_id = R.route_id) JOIN BUS B ON (B.bus_id = SC.bus_id) WHERE SS.stop_name = :start "+
-           "AND R.stops_number = RE.stop_number AND SS.stop_name != SE.stop_name AND ((departure_time_hrs = :time_hr AND departure_time_mins >= :time_min) OR (departure_time_hrs > :time_hr)) ORDER BY departure_time_hrs")
+           "AND R.stops_number = RE.stop_number AND SS.stop_name != SE.stop_name AND ((departure_time_hrs = :time_hr AND departure_time_mins >= :time_min) OR (departure_time_hrs > :time_hr)) ORDER BY departure_time_hrs, departure_time_mins")
     LiveData<List<StopObject>> getStopServices(String start, int time_hr, int time_min);
 
     @Query("SELECT * FROM STOP WHERE stop_name = :name")

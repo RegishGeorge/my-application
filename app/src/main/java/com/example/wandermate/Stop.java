@@ -5,14 +5,15 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Stop {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int stop_id;
 
     private String stop_name;
     private double stop_latitude;
     private double stop_longitude;
 
-    public Stop(String stop_name, double stop_latitude, double stop_longitude) {
+    public Stop(int stop_id, String stop_name, double stop_latitude, double stop_longitude) {
+        this.stop_id = stop_id;
         this.stop_name = stop_name;
         this.stop_latitude = stop_latitude;
         this.stop_longitude = stop_longitude;
