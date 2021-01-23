@@ -109,6 +109,7 @@ public abstract class WanderMateDatabase extends RoomDatabase {
             wanderMateDao.insert_route_details(new RouteDetails(1, 3, 3, 0, 35));
             wanderMateDao.insert_route_details(new RouteDetails(1, 4, 4, 0, 45));
             wanderMateDao.insert_route_details(new RouteDetails(1, 5, 5, 1, 5));
+
             wanderMateDao.insert_route_details(new RouteDetails(2, 6, 1, 0, 0));
             wanderMateDao.insert_route_details(new RouteDetails(2, 7, 2, 0, 40));
             wanderMateDao.insert_route_details(new RouteDetails(2, 8, 3, 1, 0));
@@ -132,6 +133,7 @@ public abstract class WanderMateDatabase extends RoomDatabase {
             wanderMateDao.insert_route_details(new RouteDetails(2, 21, 21, 8, 20));
             wanderMateDao.insert_route_details(new RouteDetails(2, 22, 22, 8, 35));
             wanderMateDao.insert_route_details(new RouteDetails(2, 23, 23, 9, 10));
+
             wanderMateDao.insert_route_details(new RouteDetails(3, 6, 1, 0, 0));
             wanderMateDao.insert_route_details(new RouteDetails(3, 25, 2, 0, 25));
             wanderMateDao.insert_route_details(new RouteDetails(3, 26, 3, 0, 45));
@@ -158,6 +160,7 @@ public abstract class WanderMateDatabase extends RoomDatabase {
             wanderMateDao.insert_route_details(new RouteDetails(3, 40, 24, 10, 25));
             wanderMateDao.insert_route_details(new RouteDetails(3, 41, 25, 10, 50));
             wanderMateDao.insert_route_details(new RouteDetails(3, 42, 26, 11, 10));
+
             wanderMateDao.insert_route_details(new RouteDetails(4, 6, 1, 0, 0));
             wanderMateDao.insert_route_details(new RouteDetails(4, 7, 2, 0, 40));
             wanderMateDao.insert_route_details(new RouteDetails(4, 8, 3, 1, 0));
@@ -182,6 +185,7 @@ public abstract class WanderMateDatabase extends RoomDatabase {
             wanderMateDao.insert_route_details(new RouteDetails(4, 22, 22, 8, 35));
             wanderMateDao.insert_route_details(new RouteDetails(4, 23, 23, 9, 10));
             wanderMateDao.insert_route_details(new RouteDetails(4, 44, 24, 9, 40));
+
             wanderMateDao.insert_route_details(new RouteDetails(5, 6, 1, 0, 0));
             wanderMateDao.insert_route_details(new RouteDetails(5, 25, 2, 0, 25));
             wanderMateDao.insert_route_details(new RouteDetails(5, 26, 3, 0, 45));
@@ -211,7 +215,6 @@ public abstract class WanderMateDatabase extends RoomDatabase {
 
             wanderMateDao.insert_service(new Service(1, 1, 8, 0));
             wanderMateDao.insert_service(new Service(1, 2, 23, 0));
-            wanderMateDao.insert_service(new Service(2, 1, 21, 30));
             wanderMateDao.insert_service(new Service(3, 1, 8, 45));
             wanderMateDao.insert_service(new Service(4, 1, 9, 0));
             wanderMateDao.insert_service(new Service(2, 1, 11, 30));

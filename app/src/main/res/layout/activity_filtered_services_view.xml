@@ -68,62 +68,63 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@id/bottom_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="8dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
 
         <Button
             android:id="@+id/btnSet"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_add_alarm"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txt_set_alarm"
+            app:layout_constraintBottom_toTopOf="@id/txt_set_alarm"
             app:layout_constraintEnd_toEndOf="@id/txt_set_alarm"
-            app:layout_constraintBottom_toTopOf="@id/txt_set_alarm"/>
+            app:layout_constraintStart_toStartOf="@+id/txt_set_alarm"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txt_set_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set Alarm"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:id="@+id/txt_set_alarm"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="8dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnFindDirections"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_directions"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txt_directions"
+            app:layout_constraintBottom_toTopOf="@id/txt_directions"
             app:layout_constraintEnd_toEndOf="@id/txt_directions"
-            app:layout_constraintBottom_toTopOf="@id/txt_directions"/>
+            app:layout_constraintStart_toStartOf="@+id/txt_directions"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txt_directions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Directions"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:id="@+id/txt_directions"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

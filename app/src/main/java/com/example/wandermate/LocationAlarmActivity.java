@@ -7,14 +7,18 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -89,18 +93,33 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
             }
         });
 
+        editTextDestination.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String destination = editTextDestination.getText().toString().trim();
+                btnShow.setEnabled(!destination.isEmpty());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String destination = editTextDestination.getText().toString().trim();
-                if(destination.isEmpty()) {
-                    editTextDestination.setError("Please enter a destination");
-                    return;
-                }
                 viewModel.getCoordinates(destination).observe(LocationAlarmActivity.this, new Observer<List<Stop>>() {
                     @Override
                     public void onChanged(List<Stop> stops) {
                         if(stops.size() == 1) {
+                            closeKeyboard();
                             latLngStop = new LatLng(stops.get(0).getStop_latitude(), stops.get(0).getStop_longitude());
                             stopName = stops.get(0).getStop_name();
                             bottomLayout.setVisibility(View.VISIBLE);
@@ -125,6 +144,14 @@ public class LocationAlarmActivity extends AppCompatActivity implements OnMapRea
                 checkSettingsAndStartLocationUpdates();
             }
         });
+    }
+
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if(view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     @Override

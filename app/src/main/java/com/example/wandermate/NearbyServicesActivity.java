@@ -102,7 +102,7 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
                                 Location.distanceBetween(location.getLatitude(), location.getLongitude(),
                                         stop.getStop_latitude(), stop.getStop_longitude(), results);
                                 if(results[0]<1000) {
-                                    flag = 1;
+                                    flag++;
                                     mMap.addMarker(new MarkerOptions()
                                             .title(stop.getStop_name())
                                             .snippet("Click to view more details.")
@@ -116,6 +116,17 @@ public class NearbyServicesActivity extends AppCompatActivity implements OnMapRe
                                 TextView textView = layout.findViewById(R.id.txt_message);
                                 imageView.setImageResource(R.drawable.ic_emoji_sad);
                                 textView.setText("No stops nearby");
+                                final Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setView(layout);
+                                toast.show();
+                            } else {
+                                LayoutInflater inflater = getLayoutInflater();
+                                View layout = inflater.inflate(R.layout.custom_toast, (ViewGroup)findViewById(R.id.toast_layout));
+                                ImageView imageView = layout.findViewById(R.id.imageView);
+                                TextView textView = layout.findViewById(R.id.txt_message);
+                                imageView.setImageResource(R.drawable.ic_tick);
+                                textView.setText("Stops found: " + flag);
                                 final Toast toast = new Toast(getApplicationContext());
                                 toast.setDuration(Toast.LENGTH_SHORT);
                                 toast.setView(layout);

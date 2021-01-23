@@ -12,7 +12,7 @@ import android.widget.VideoView;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int WELCOME_TIMEOUT = 4000;
+    private static int WELCOME_TIMEOUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

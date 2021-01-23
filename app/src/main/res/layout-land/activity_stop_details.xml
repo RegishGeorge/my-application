@@ -20,32 +20,13 @@
         android:textStyle="bold"
         android:visibility="visible" />
 
-    <EditText
-        android:id="@+id/txtSearch1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/txtTitle"
-        android:layout_marginTop="32sp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_location_icon"
-        android:drawablePadding="12dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:textSize="16sp"
-        android:inputType="textCapWords"
-        android:imeOptions="flagNoExtractUi"
-        android:ems="10"
-        android:hint="Destination"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtSearch1"
+        android:layout_below="@+id/txtTitle"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         app:cardCornerRadius="5dp"
         android:visibility="visible">
@@ -99,32 +80,54 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="8dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
 
         <Button
             android:id="@+id/btnNavigate"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_navigation"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/txt_navigate"
+            app:layout_constraintBottom_toTopOf="@id/txt_navigate"
             app:layout_constraintEnd_toEndOf="@id/txt_navigate"
-            app:layout_constraintBottom_toTopOf="@id/txt_navigate"/>
+            app:layout_constraintStart_toStartOf="@+id/txt_navigate"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txt_navigate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Navigate"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:id="@+id/txt_navigate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/txtSearch1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_location_icon"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Destination"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textCapWords"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_navigate"
+            app:layout_constraintEnd_toStartOf="@+id/txt_navigate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="@+id/btnNavigate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

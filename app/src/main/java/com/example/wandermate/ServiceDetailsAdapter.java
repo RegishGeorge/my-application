@@ -54,6 +54,11 @@ public class ServiceDetailsAdapter extends RecyclerView.Adapter<ServiceDetailsAd
         notifyDataSetChanged();
     }
 
+    public void filterList(ArrayList<ServiceDetailsObject> filteredList) {
+        serviceDetails = filteredList;
+        notifyDataSetChanged();
+    }
+
     static class ServiceDetailsHolder extends RecyclerView.ViewHolder {
         private TextView txtStopName, txtTime;
 

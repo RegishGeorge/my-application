@@ -2,6 +2,8 @@ package com.example.wandermate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.wandermate.StopDetailsActivity.START_NAME;
 
 public class StopServiceAdapter extends RecyclerView.Adapter<StopServiceAdapter.StopServiceHolder> {
+    private static final String TAG = "StopServiceAdapter";
     private List<StopObject> stopServices = new ArrayList<>();
     private Context mContext;
+    private LatLng coordinates;
 
-    public StopServiceAdapter(Context context) {
+    public StopServiceAdapter(Context context, LatLng position) {
         mContext = context;
+        this.coordinates = position;
     }
 
     @NonNull
@@ -58,6 +65,9 @@ public class StopServiceAdapter extends RecyclerView.Adapter<StopServiceAdapter.
                 intent.putExtra("route_id", stopServices.get(position).getRoute_id());
                 intent.putExtra("bus_id", stopServices.get(position).getBus_id());
                 intent.putExtra("Start", START_NAME);
+                Bundle args = new Bundle();
+                args.putParcelable("position", coordinates);
+                intent.putExtra("Stop Position", args);
                 mContext.startActivity(intent);
             }
         });
@@ -71,6 +81,12 @@ public class StopServiceAdapter extends RecyclerView.Adapter<StopServiceAdapter.
     public void setStopServices(List<StopObject> stopServices) {
         this.stopServices = stopServices;
         notifyDataSetChanged();
+    }
+
+    public void filterList(ArrayList<StopObject> filteredList) {
+        stopServices = filteredList;
+        notifyDataSetChanged();
+        Log.d(TAG, "filterList: dataset changed");
     }
 
     static class StopServiceHolder extends RecyclerView.ViewHolder {

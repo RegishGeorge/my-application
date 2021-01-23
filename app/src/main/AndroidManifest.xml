@@ -22,39 +22,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ServiceDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".ServiceDetailsActivity"/>
         <activity
             android:name=".StopAlarmActivity"
-            android:screenOrientation="portrait"/>
+            android:excludeFromRecents="true"/>
         <activity
-            android:name=".StopDetailsActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".StopDetailsActivity"/>
         <activity
-            android:name=".FilteredServicesViewActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".FilteredServicesViewActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACyUg6ZVx2tog3VO9jCDgrT6FiR6OGi8o" />
 
         <activity
-            android:name=".LocationAlarmActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".LocationAlarmActivity"/>
         <activity
             android:name=".NearbyServicesActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize"/>
         <activity
-            android:name=".PermissionsActivity"
-            android:screenOrientation="portrait">
+            android:name=".PermissionsActivity">
 
         </activity>
         <activity
-            android:name=".LauncherActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".LauncherActivity"/>
         <activity
             android:name=".FindServicesActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize"/>
 
         <service
             android:name=".AlarmService"
